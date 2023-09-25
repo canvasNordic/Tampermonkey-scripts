@@ -22,7 +22,7 @@
     /*******************/
     const alwaysREST = false //Always use REST API to collect courselist
     const RESTon = [1] //Use REST API to collect courselist on these accounts
-    const termSortAlg = 'date' //uio,date
+    const termSortAlg = 'uio' //uio,date
 
     /*********************/
     /* Utility functions */
@@ -266,7 +266,7 @@
         document.querySelector('#content h1').insertAdjacentHTML("beforeend",'<span id="cooladmintoolsloadstuff"><button type="button" id="avbrytkurslasting" style="margin: 0 1em 0 1em;">Avbryt lasting av kursliste</button><span id="progressindicator" style="font-size:small"> </span></span>')
         document.getElementById('avbrytkurslasting').onclick = (e)=>{api.cancelGetAll = true}
         let result = await api.getAll(`/accounts/${ENV.ACCOUNT_ID}/courses?include[]=term&include[]=account_name`,progressbar)
-        window.cooladmintools.internal.courses = result.map(course=>{return {id:course.id, sisId:course.sis_course_id, name:course.name, courseCode:course.course_code, state:course.workflow_state, createdAt:course.created_at, term:course.enrollment_term_id, accountId:course.account_id, accountName:course.account_name}})
+        window.cooladmintools.internal.courses = result.map(course=>{return {id:course.id.toString(), sisId:course.sis_course_id, name:course.name, courseCode:course.course_code, state:course.workflow_state, createdAt:course.created_at, term:course.enrollment_term_id.toString(), accountId:course.account_id.toString(), accountName:course.account_name}})
         const terms = window.cooladmintools.internal.terms
         for (const course of result){
             terms[course.enrollment_term_id]={name:course.term.name,start:course.term.start_at,end:course.term.end_at}
@@ -323,6 +323,8 @@
                 await getCoursesAndTermsWithREST()
             }
         }
+        console.log ("Kursliste")
+        console.log (window.cooladmintools.internal.courses)
         let termsArray = Object.keys(terms)
         let pastTermsArray = []
         let futureTermsArray = []
