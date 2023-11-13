@@ -4,3 +4,5 @@ As an admin you have access to a page named Admin Tools (Norwegian: Admin-verkt√
 CoolAdminTools consists of a central script that handles the tabs, simplify calling the Canvas API, let the user filter which courses to work on, and several other things. You insert the script in your favorite userscript-manager (Tampermonkey/Greasemonkey/Violentmonkey). There are a few things you can [configure](central_script_config.md), and there is [documentation to write your own tools](central_script_doc.md).
 
 In addition you insert one or more of the other scripts into your favorite userscript-manager (as separate scripts) to get the tools you want. These scripts utilize the central script and waits for the central script to load the courselist for the current account.
+
+The presentation from the Nordic Canvas-day 2023 in Amsterdam: [https://slides.com/torejorg/framework-for-canvas-admintools](https://slides.com/torejorg/framework-for-canvas-admintools)
